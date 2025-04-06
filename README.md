@@ -43,3 +43,7 @@ You’ll be asked to choose the language of the audio.
  👨‍💻 Credits
 	•	Built using Whisper by OpenAI
 	•	Designed for educational and productivity purposes
+
+P.S. Please note that the free Google Colab account offers limited access to the T4 GPU, which is essential for faster transcription performance.
+If you often run into usage limits, I recommend creating an additional Google account and switching between them.
+This way, you’ll always have access to GPU resources when you need them most 😉
