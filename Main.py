@@ -2,7 +2,7 @@
 !pip install -q openai-whisper pydub python-docx fpdf tqdm
 !sudo apt update && sudo apt install -y ffmpeg
 
-# ✅ Importa le librerie
+# ✅ Import library
 import whisper
 import torch
 from google.colab import files
@@ -12,15 +12,15 @@ from fpdf import FPDF
 import time
 import os
 
-# ✅ Seleziona il dispositivo
+# ✅ Choose device
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print("📌 Dispositivo disponibile:", device)
 
-# ✅ Carica il modello
+# ✅ load the model
 model = whisper.load_model("large" if device == "cuda" else "medium", device=device)
 print("✅ Modello Whisper caricato con successo!")
 
-# 🔄 Funzione di trascrizione avanzata
+# 🔄 Transcription function
 def transcribe_audio(file_path, language="auto"):
     print("🔍 Inizio trascrizione...\n")
     result = model.transcribe(file_path, language=language, word_timestamps=True, verbose=False)
@@ -33,24 +33,24 @@ def transcribe_audio(file_path, language="auto"):
     print("\n\n✅ Trascrizione completata!")
     return full_text.strip()
 
-# 📁 Carica il file audio
+# 📁 upload audio file
 uploaded = files.upload()
 file_name = next(iter(uploaded))
 print(f"📥 File caricato: {file_name}")
 
-# 🌍 Lingue supportate
+# 🌍 Supported languages
 lingue_supportate = ['zh', 'es', 'en', 'hi', 'ar', 'pt', 'ru', 'ja', 'de', 'fr', 'it', 'auto']
-print("\n🌐 Lingue disponibili: zh (Cinese), es (Spagnolo), en (Inglese), hi (Hindi), ar (Arabo), pt (Portoghese), ru (Russo), ja (Giapponese), de (Tedesco), fr (Francese), it (Italiano), auto (rilevamento automatico)")
-language = input("Inserisci la lingua (es. 'it' per italiano, 'en' per inglese, 'auto' per automatico): ").strip()
+print("\n🌐 Languages: zh (Cinese), es (Spagnolo), en (Inglese), hi (Hindi), ar (Arabo), pt (Portoghese), ru (Russo), ja (Giapponese), de (Tedesco), fr (Francese), it (Italiano), auto (rilevamento automatico)")
+language = input("Choose the language (es. 'it' for italian, 'en' for inglese, 'auto' for automatic): ").strip()
 
 if language not in lingue_supportate:
-    print("⚠️ Lingua non supportata. Uso 'auto' come default.")
+    print("⚠️ not supported language. Use 'auto' as default.")
     language = "auto"
 
-# 📝 Trascrizione
+# 📝 Transcription
 transcription = transcribe_audio(file_name, language=language)
 
-# 💾 Funzioni di salvataggio
+# 💾 saving function
 def save_as_txt(text, filename="trascrizione.txt"):
     with open(filename, "w", encoding="utf-8") as f:
         f.write(text)
@@ -70,10 +70,10 @@ def save_as_docx(text, filename="trascrizione.docx"):
     doc.save(filename)
     files.download(filename)
 
-# 🗂️ Esporta la trascrizione
-print("\n📤 In quale formato vuoi salvare la trascrizione?")
+# 🗂️ Export transcription
+print("\n📤 In which format do you want to save your transcription?")
 print("1 = .txt\n2 = .pdf\n3 = .docx")
-formato = input("Inserisci il numero corrispondente al formato desiderato: ").strip()
+formato = input("Enter the corresponding  number to the desired format: ").strip()
 
 if formato == "1":
     save_as_txt(transcription)
