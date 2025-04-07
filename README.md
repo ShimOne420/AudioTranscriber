@@ -2,8 +2,7 @@
 Use this code on google colab to transcribe your audio for free with whisper openAI open source model
 
 It transcribes audio files directly from your computer and allows you to:
-	•	✅ See real-time transcription with progress percentage.
-	•	🌍 Transcribe in the top 10 most spoken languages in the world.
+•	🌍 Transcribe in the top 10 most spoken languages in the world.
 	•	📄 Export the transcription to TXT, PDF, or Word (.docx) formats.
 
 
